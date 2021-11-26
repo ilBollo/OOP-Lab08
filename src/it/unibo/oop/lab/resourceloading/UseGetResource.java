@@ -39,7 +39,7 @@ public final class UseGetResource {
         /*
          * Loading of icons and images is made very easy!
          */
-        final URL imgURL = ClassLoader.getSystemResource("images/gandalf.jpg");
+        final URL imgURL = ClassLoader.getSystemResource("images/flower.jpg");
         final ImageIcon icon = new ImageIcon(imgURL);
         /*
          * From now on, it's just plain GUI construction

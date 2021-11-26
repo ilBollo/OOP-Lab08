@@ -32,4 +32,11 @@
 		<nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
 		<nature>ch.acanda.eclipse.pmd.builder.PMDNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>res/images/flower.jpg</name>
+			<type>1</type>
+			<location>/home/dream2/OOP/lab08/res/images/flower.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>
