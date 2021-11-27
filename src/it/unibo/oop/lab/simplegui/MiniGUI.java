@@ -4,14 +4,14 @@
 package it.unibo.oop.lab.simplegui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -24,27 +24,29 @@ import javax.swing.JPanel;
 public class MiniGUI {
 
     private static final String TITLE = "A very simple GUI application";
-    private static final int PROPORTION = 5;
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
 
-    /**
-     * 
-     */
+  
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        final JPanel newPanel = new JPanel();
+        newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.X_AXIS));
+        canvas.add(newPanel, BorderLayout.CENTER);
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        canvas.add(write);
+        final var result = new JLabel("Result: ");
+        canvas.add(result, BorderLayout.NORTH);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*
-         * Handlers
-         */
+
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                System.out.println(rng.nextInt());
+                final int value = rng.nextInt();
+                result.setText("Result: " + value);
+                System.out.println(value);
             }
         });
     }
@@ -58,7 +60,9 @@ public class MiniGUI {
          * issue). It is MUCH better than manually specify the size of a window
          * in pixel: it takes into account the current resolution.
          */
-        final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        //In display(), use JFrame.pack() to resize the frame to the minimum size prior to displaying
+        frame.pack();
+        /*final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
