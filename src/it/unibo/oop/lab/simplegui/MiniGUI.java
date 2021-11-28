@@ -1,6 +1,3 @@
-/**
- * 
- */
 package it.unibo.oop.lab.simplegui;
 
 import java.awt.BorderLayout;
@@ -27,7 +24,9 @@ public class MiniGUI {
     private final Random rng = new Random();
     private final JFrame frame = new JFrame(TITLE);
 
-  
+    /**
+     * 
+     */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
