@@ -33,6 +33,7 @@ public class Controller {
     
     private static final String DEFAULT_FILE_PATH = System.getProperty("user.home")
     + System.getProperty("file.separator") + "output.txt";
+    
     private File currentFile; 
     
     public Controller() {
@@ -41,6 +42,7 @@ public class Controller {
     public Controller(final String path) {
         this.currentFile = new File(path);
     }
+    
     public File getCurrentFile() {
         return this.currentFile;
     }
@@ -52,6 +54,15 @@ public class Controller {
     public void write(final String s) throws IOException {
         try (PrintStream out = new PrintStream(currentFile)) {
             out.println(s);
+        }
+    }
+    
+    public void setDestination(final File file) {
+        final File parent = file.getParentFile();
+        if (parent.exists()) {
+            currentFile = file;
+        } else {
+            throw new IllegalArgumentException("Cannot save in a non-existing folder");
         }
     }
 }
