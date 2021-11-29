@@ -90,6 +90,7 @@ public final class SimpleGUIWithFileChooser {
          * flag makes the OS window manager take care of the default positioning
          * on screen. Results may vary, but it is generally the best choice.
          */
+        frame.pack();
         frame.setLocationByPlatform(true);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
