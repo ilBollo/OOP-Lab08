@@ -17,7 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import it.unibo.oop.lab.mvcio.Controller;
-import it.unibo.oop.lab.mvcio.SimpleGUI;
 
 /**
  * A very simple program using a graphical interface.
@@ -26,12 +25,15 @@ import it.unibo.oop.lab.mvcio.SimpleGUI;
 public final class SimpleGUIWithFileChooser { 
 
     private final JFrame frame = new JFrame("SimpleGUIWithFileChooser");
-
+    /**
+     * 
+     * @param ctrl
+     */
     public SimpleGUIWithFileChooser(final Controller ctrl) {
-        final var canvas = new JPanel();
+        final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        final var textArea = new JTextArea();
-        final var button = new JButton("Save");
+        final JTextArea textArea = new JTextArea();
+        final JButton button = new JButton("Save");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -47,14 +49,14 @@ public final class SimpleGUIWithFileChooser {
         final JPanel secondPanel = new JPanel();
         secondPanel.setLayout(new BorderLayout());
         canvas.add(secondPanel, BorderLayout.NORTH);
-        final var secondJText = new JTextField(ctrl.getPath());
+        final JTextField secondJText = new JTextField(ctrl.getPath());
         secondJText.setEditable(false);
         secondPanel.add(secondJText, BorderLayout.CENTER);
-        final var secondButton = new JButton("Browse...");
+        final JButton secondButton = new JButton("Browse...");
         secondButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                final JFileChooser openC= new JFileChooser(); 
+                final JFileChooser openC = new JFileChooser("Choose where to sabe"); 
                 openC.setSelectedFile(ctrl.getCurrentFile());
                 final int result = openC.showSaveDialog(frame);
                 switch (result) {
@@ -67,6 +69,7 @@ public final class SimpleGUIWithFileChooser {
                     break;
                 default:
                     JOptionPane.showMessageDialog(frame, result, "Alt", JOptionPane.ERROR_MESSAGE);
+                    break;
                 }
             }
         });
@@ -84,13 +87,12 @@ public final class SimpleGUIWithFileChooser {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
-        frame.setSize(sw / 2, sh / 2);
+        frame.setSize(sw / 4, sh / 4);
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
          * on screen. Results may vary, but it is generally the best choice.
          */
-        frame.pack();
         frame.setLocationByPlatform(true);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

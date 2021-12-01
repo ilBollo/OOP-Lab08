@@ -8,21 +8,19 @@ import java.util.Objects;
  * 
  *
  */
-public class SimpleController implements Controller{
-    
+public final class SimpleController implements Controller {
     private final List<String> stringStory = new LinkedList<>();
     private String nextString;
-    
+
     @Override
-    public void setNextString(String nextString) {
-       this.nextString = Objects.requireNonNull(nextString, "This method not accept null");
-        }
+    public void setNextString(final String nextString) {
+        this.nextString = Objects.requireNonNull(nextString, "This method not accept null");
+    }
 
     @Override
     public String getNextStringToPrint() {
         return this.nextString;
     }
-
     @Override
     public List<String> getHistory() {
         return stringStory;
@@ -34,7 +32,7 @@ public class SimpleController implements Controller{
             throw new IllegalStateException("There is no string set");
         }
         stringStory.add(this.nextString);
-        System.out.println(this.nextString);        
+        System.out.println(this.nextString);
     }
-
 }
+

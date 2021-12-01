@@ -18,9 +18,8 @@ import javax.swing.JTextArea;
  * 
  */
 public final class SimpleGUI {
-    private static String TITLE = "SimpleGUI";
 
-    private final JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame("SimpleGUI");
 
     /*
      * Once the Controller is done, implement this class in such a way that:
@@ -43,20 +42,19 @@ public final class SimpleGUI {
      */
 
     /**
-     * builds a new {@link SimpleGUI}.
+     * 
+     * @param ctrl
      */
-    public SimpleGUI() {
-        final var controller = new Controller();
-        frame.setTitle(TITLE);
-        final var canvas = new JPanel();
+    private SimpleGUI(final Controller ctrl) {
+        final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
-        final var textArea = new JTextArea();
-        final var button = new JButton("Save");
+        final JTextArea textArea = new JTextArea();
+        final JButton button = new JButton("Save");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-                    controller.write(textArea.getText());
+                    ctrl.write(textArea.getText());
                 } catch (IOException ex) {
                     JOptionPane.showConfirmDialog(frame, ex, "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -90,9 +88,13 @@ public final class SimpleGUI {
     private void display() {
         frame.setVisible(true);
     }
-    
-    public static void main(final String... args) {
-        new SimpleGUI().display();
+    /**
+     * 
+     * @param a
+     */
+    public static void main(final String... a) {
+        final SimpleGUI gui = new SimpleGUI(new Controller());
+        gui.display();
     }
 }
 
